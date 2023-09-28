@@ -33,15 +33,11 @@ jobs:
       - name: Clone
         uses: actions/checkout@v3
         with:
-          repository: MIZOGUCHIKoki/ConfigFiles
-          path: ConfigFiles
+          repository: MIZOGUCHIKoki/TextLint-workflows
+          path: TextLint-workflows
       - name: Copy files to current directory
         run: | 
-          cp  ./ConfigFiles/tex_textlint/package.json ./
-          cp  ./ConfigFiles/tex_textlint/.textlintrc.json ./
-          cp  ./ConfigFiles/tex_textlint/package-lock.json ./
-          cp  ./ConfigFiles/.gitconfig ./
-            
+          cp -a ./TextLint-workflows/configuration-files/. ./
       - name: Setup-node
         uses: actions/setup-node@v3
         with:
