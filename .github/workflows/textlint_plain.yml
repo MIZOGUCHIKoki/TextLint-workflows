@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: MIZOGUCHIKoki/TextLint-workflows
-          # path: TextLint-workflows   
+          path: TextLint-workflows   
       - name: moved files
         run: | 
           ls -a
