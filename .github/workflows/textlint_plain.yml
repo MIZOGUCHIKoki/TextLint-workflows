@@ -26,6 +26,7 @@ jobs:
           ref: ${{ github.head_ref }}
       - name: Check file contents(Debug)
         run: |
+          ls -a
           cat package.json
           cat package-lock.json
       - name: Setup-node
