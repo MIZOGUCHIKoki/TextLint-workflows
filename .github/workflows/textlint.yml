@@ -10,7 +10,7 @@ on:
       - '**/**.tex'
   
 jobs:
-  CALL-workflow[TextLint]:
+  CALL-workflow_TextLint:
     uses: MIZOGUCHIKoki/TextLint-workflows/.github/workflows/textlint_plain.yml@master
     secrets:
       gh_token: ${{ secrets.ACCESS_TOKEN }}
