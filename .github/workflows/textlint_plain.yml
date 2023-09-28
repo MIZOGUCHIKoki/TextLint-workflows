@@ -15,11 +15,11 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: MIZOGUCHIKoki/TextLint-workflows
-          path: TextLint-workflows   
+          # path: TextLint-workflows   
       - name: moved files
         run: | 
-          cp -a ./TextLint-workflows/configuration-files/. ./
           ls -a
+          # cp -a ./TextLint-workflows/configuration-files/. ./
       - name: Checkout current branch
         uses: actions/checkout@v3
         with:
@@ -28,8 +28,6 @@ jobs:
       - name: Check file contents(Debug)
         run: |
           ls -a
-          cat package.json
-          cat package-lock.json
       - name: Setup-node
         uses: actions/setup-node@v3
         with:
@@ -50,8 +48,7 @@ jobs:
         run: cat ./textlint.txt
       - name: Report if textlint finds problems (other branches)
         if: ${{ failure() && github.event_name != 'push' }}
-        run: |
-            
+        run: |   
             pwd_esc=$(pwd | sed 's/\//\\\//g')
             cat textlint.txt | sed "s/${pwd_esc}/## :memo: ./g" >> ./.body.txt
             gh pr comment --body-file ./.body.txt "${URL}"
