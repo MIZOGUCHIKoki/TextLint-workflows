@@ -6,7 +6,7 @@ on:
         required: true
         description: 'GITHUB_TOKEN'
 jobs:
-  RUN-workflow[TextLint]:
+  RUN-workflow_TextLint:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write

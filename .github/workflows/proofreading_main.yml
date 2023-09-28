@@ -7,7 +7,7 @@ on:
         description: 'GITHUB_TOKEN'
 
 jobs:
-  RUN-workflow[Proofreading]:
+  RUN-workflow_Proofreading:
     if: (github.event.issue.pull_request != null) && github.event.comment.body == 'correction'
     runs-on: ubuntu-latest
     steps:
