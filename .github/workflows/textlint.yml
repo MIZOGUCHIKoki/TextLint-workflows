@@ -1,0 +1,16 @@
+name: TextLint
+on: 
+  push:
+    branches:
+      - master
+    paths:
+      - '**/**.tex'
+  pull_request_target:
+    paths:
+      - '**/**.tex'
+  
+jobs:
+  CALL-workflow[TextLint]:
+    uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/textlint_main.yml@main
+    secrets:
+      gh_token: ${{ secrets.ACCESS_TOKEN }}

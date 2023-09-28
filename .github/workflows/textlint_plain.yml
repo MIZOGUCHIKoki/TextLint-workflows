@@ -1,0 +1,54 @@
+name: TextLint
+on: 
+  workflow_call:
+    secrets:
+      gh_token:
+        required: true
+        description: 'GITHUB_TOKEN'
+jobs:
+  RUN-workflow[TextLint]:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Clone textlint system file
+        uses: actions/checkout@v3
+        with:
+          repository: MIZOGUCHIKoki/ConfigFiles
+          path: ConfigFiles      
+      - name: moved files
+        run: | 
+          cp -a ./ConfigFiles/tex_textlint/. ./
+      - name: Checkout current branch
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.gh_token }}
+          ref: ${{ github.head_ref }}
+      - name: Setup-node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          cache: 'npm'
+      - name: Install packages via packages.json
+        run: |
+          npm install
+      - name: Install zsh
+        run: |
+          sudo apt-get install zsh
+      - name: Run textlint
+        run: |
+            npx textlint **/*.tex >> ./textlint.txt
+        shell: zsh {0}
+      - name: Report if textlint finds problems (master)
+        if: ${{ failure() && github.event_name == 'push' }}
+        run: cat ./textlint.txt
+      - name: Report if textlint finds problems (other branches)
+        if: ${{ failure() && github.event_name != 'push' }}
+        run: |
+            
+            pwd_esc=$(pwd | sed 's/\//\\\//g')
+            cat textlint.txt | sed "s/${pwd_esc}/## :memo: ./g" >> ./.body.txt
+            gh pr comment --body-file ./.body.txt "${URL}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          URL: ${{ github.event.pull_request.html_url }}

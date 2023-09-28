@@ -1,0 +1,12 @@
+name: Proofreading
+on:
+  issue_comment:
+    types:
+      - created
+      - edited
+
+jobs:
+  CALL-workflow[Proofreading]:
+    uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/correction_main.yml@main
+    secrets:
+      gh_token: ${{ secrets.ACCESS_TOKEN }}
