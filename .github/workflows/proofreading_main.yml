@@ -30,14 +30,12 @@ jobs:
         with:
           ref: ${{ steps.set-target-branch.outputs.result }}
           token: ${{ secrets.gh_token }}
-      - name: Clone
-        uses: actions/checkout@v3
-        with:
-          repository: MIZOGUCHIKoki/TextLint-workflows
-          path: TextLint-workflows
-      - name: Copy files to current directory
-        run: | 
-          cp -a ./TextLint-workflows/configuration-files/. ./
+      - name: Wget textlint system file
+        run: |
+          wget https://raw.githubusercontent.com/MIZOGUCHIKoki/TextLint-workflows/master/configuration-files/package.json
+          wget https://raw.githubusercontent.com/MIZOGUCHIKoki/TextLint-workflows/master/configuration-files/package-lock.json
+          wget https://raw.githubusercontent.com/MIZOGUCHIKoki/TextLint-workflows/master/configuration-files/.textlintrc.json
+          wget https://raw.githubusercontent.com/MIZOGUCHIKoki/TextLint-workflows/master/configuration-files/toHTML.xsl
       - name: Setup-node
         uses: actions/setup-node@v3
         with:
