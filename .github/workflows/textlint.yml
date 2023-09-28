@@ -11,6 +11,6 @@ on:
   
 jobs:
   CALL-workflow[TextLint]:
-    uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/textlint_main.yml@main
+    uses: MIZOGUCHIKoki/TextLint-workflows/.github/workflows/textlint_plain.yml@master
     secrets:
       gh_token: ${{ secrets.ACCESS_TOKEN }}

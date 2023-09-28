@@ -19,11 +19,11 @@ jobs:
       - name: Clone textlint system file
         uses: actions/checkout@v3
         with:
-          repository: MIZOGUCHIKoki/ConfigFiles
-          path: ConfigFiles      
+          repository: MIZOGUCHIKoki/TextLint-workflows
+          path: TextLint-workflows      
       - name: moved files
         run: | 
-          cp -a ./ConfigFiles/tex_textlint/. ./
+          cp -a ./TextLint-workflows/configuration-files/. ./
       - name: Setup-node
         uses: actions/setup-node@v3
         with:
