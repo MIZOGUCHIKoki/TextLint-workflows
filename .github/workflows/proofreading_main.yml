@@ -38,7 +38,6 @@ jobs:
       - name: Copy files to current directory
         run: | 
           cp -a ./TextLint-workflows/configuration-files/. ./
-          ls -a
       - name: Setup-node
         uses: actions/setup-node@v3
         with:
