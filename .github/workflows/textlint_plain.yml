@@ -24,6 +24,10 @@ jobs:
         with:
           token: ${{ secrets.gh_token }}
           ref: ${{ github.head_ref }}
+      - name: Check file contents(Debug)
+        run: |
+          cat package.json
+          cat package-lock.json
       - name: Setup-node
         uses: actions/setup-node@v3
         with:
