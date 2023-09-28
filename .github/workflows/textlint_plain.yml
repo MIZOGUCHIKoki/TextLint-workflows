@@ -11,20 +11,17 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      - name: Clone textlint system file
-        uses: actions/checkout@v3
-        with:
-          repository: MIZOGUCHIKoki/TextLint-workflows
-          path: TextLint-workflows   
-      - name: moved files
-        run: | 
-          ls -a
-          # cp -a ./TextLint-workflows/configuration-files/. ./
       - name: Checkout current branch
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.gh_token }}
           ref: ${{ github.head_ref }}
+      - name: Wget textlint system file
+        run: |
+          wget https://raw.githubusercontent.com/MIZOGUCHIKoki/TextLint-workflows/master/configuration-files/package.json
+          wget https://raw.githubusercontent.com/MIZOGUCHIKoki/TextLint-workflows/master/configuration-files/package-lock.json
+          wget https://raw.githubusercontent.com/MIZOGUCHIKoki/TextLint-workflows/master/configuration-files/.textlintrc.json
+          wget https://raw.githubusercontent.com/MIZOGUCHIKoki/TextLint-workflows/master/configuration-files/toHTML.xsl
       - name: Check file contents(Debug)
         run: |
           ls -a
