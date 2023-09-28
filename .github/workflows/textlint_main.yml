@@ -23,7 +23,6 @@ jobs:
           path: TextLint-workflows      
       - name: moved files
         run: | 
-          ls -a
           cp -a ./TextLint-workflows/configuration-files/. ./
       - name: Setup-node
         uses: actions/setup-node@v3
