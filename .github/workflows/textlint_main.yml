@@ -19,7 +19,6 @@ jobs:
       - name: Wget textlint system file
         run: |
           wget https://raw.githubusercontent.com/MIZOGUCHIKoki/TextLint-workflows/master/configuration-files/package.json
-          wget https://raw.githubusercontent.com/MIZOGUCHIKoki/TextLint-workflows/master/configuration-files/package-lock.json
           wget https://raw.githubusercontent.com/MIZOGUCHIKoki/TextLint-workflows/master/configuration-files/.textlintrc.json
           wget https://raw.githubusercontent.com/MIZOGUCHIKoki/TextLint-workflows/master/configuration-files/toHTML.xsl
       - name: Setup-node
