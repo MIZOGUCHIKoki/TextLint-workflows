@@ -41,7 +41,6 @@ jobs:
 
       - name: Run textlint
         run: |
-          ls
           zsh lint.sh
         shell: zsh {0}
 
