@@ -46,8 +46,9 @@ jobs:
 
       - name: Report if textlint finds problems (master)
         if: ${{ failure() && github.event_name == 'push' }}
-        run: cat ./textlint_ja.txt
-        run: cat ./textlint_en.txt
+        run: | 
+            cat ./textlint_ja.txt
+            cat ./textlint_en.txt
 
       - name: Report if textlint finds problems (other branches)
         if: ${{ failure() && github.event_name != 'push' }}
