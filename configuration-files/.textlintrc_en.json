@@ -1,0 +1,20 @@
+{
+  "plugins": {
+    "latex2e": true
+  },
+  "filters": {
+    "allowlist": true,
+    "comments": {
+      "enablingComment": "textlint-enable",
+      "disablingComment": "textlint-disable"
+    }
+  },
+  "rules": {
+    "terminology": {
+      "defaultTerms": true,
+      "skip": [],
+      "terms": "./terms.jsonc",
+      "exclude": []
+    }
+  }
+}

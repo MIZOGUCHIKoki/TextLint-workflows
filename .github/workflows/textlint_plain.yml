@@ -16,34 +16,48 @@ jobs:
         with:
           token: ${{ secrets.gh_token }}
           ref: ${{ github.head_ref }}
+
       - name: Wget textlint system file
         run: |
           wget https://raw.githubusercontent.com/MIZOGUCHIKoki/TextLint-workflows/master/configuration-files/package.json
-          wget https://raw.githubusercontent.com/MIZOGUCHIKoki/TextLint-workflows/master/configuration-files/.textlintrc.json
+          wget https://raw.githubusercontent.com/MIZOGUCHIKoki/TextLint-workflows/master/configuration-files/.textlintrc_ja.json
+          wget https://raw.githubusercontent.com/MIZOGUCHIKoki/TextLint-workflows/master/configuration-files/.textlintrc_en.json
           wget https://raw.githubusercontent.com/MIZOGUCHIKoki/TextLint-workflows/master/configuration-files/toHTML.xsl
+          wget https://raw.githubusercontent.com/MIZOGUCHIKoki/TextLint-workflows/master/configuration-files/lint.sh
+
       - name: Setup-node
         uses: actions/setup-node@v3
         with:
           node-version: 14
           cache: 'npm'
+
       - name: Install packages via packages.json
         run: |
           npm install
+
       - name: Install zsh
         run: |
           sudo apt-get install zsh
+
       - name: Run textlint
         run: |
-            npx textlint **/*.tex >> ./textlint.txt
+          zsh lint.sh
         shell: zsh {0}
+
       - name: Report if textlint finds problems (master)
         if: ${{ failure() && github.event_name == 'push' }}
-        run: cat ./textlint.txt
+        run: cat ./textlint_ja.txt
+        run: cat ./textlint_en.txt
+
       - name: Report if textlint finds problems (other branches)
         if: ${{ failure() && github.event_name != 'push' }}
         run: |   
             pwd_esc=$(pwd | sed 's/\//\\\//g')
-            cat textlint.txt | sed "s/${pwd_esc}/## :memo: ./g" >> ./.body.txt
+            cat "# English" >> ./.body.txt
+            cat ./textlint_en.txt | sed "s/${pwd_esc}/### :memo: ./g" >> ./.body.txt
+            cat "# Japanese" >> ./.body.txt
+            cat ./textlint_ja.txt | sed "s/${pwd_esc}/### :memo: ./g" >> ./.body.txt
+            cat ./.body.txt
             gh pr comment --body-file ./.body.txt "${URL}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

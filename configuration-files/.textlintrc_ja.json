@@ -1,7 +1,20 @@
 {
-    "plugins": [
-        "latex2e"
-    ],
+    "plugins": {
+        "latex2e": true
+    },
+    "filters": {
+        "comments": {
+            "enablingComment": "textlint-enable",
+            "disablingComment": "textlint-disable"
+        },
+        "allowlist": {
+            "allow": [
+                "ユーザ",
+                "/``[\\s\\S]*?''/m",
+                "/\\{\\{[\\s\\S]*?\\}\\}/m"
+            ]
+        }
+    },
     "rules": {
         "preset-ja-spacing": true,
         "preset-ja-technical-writing": {
@@ -14,8 +27,8 @@
             "no-doubled-conjunction": false
         },
         "preset-ja-engineering-paper": {
-          "unify-kuten-and-touten": true,
-          "ja-hiragana-fukushi": false
+            "unify-kuten-and-touten": true,
+            "ja-hiragana-fukushi": false
         },
         "preset-jtf-style": {
             "1.2.1.句点(。)と読点(、)": false,
@@ -27,19 +40,12 @@
             "rulePaths": [
                 "node_modules/prh/prh-rules/media/WEB+DB_PRESS.yml"
             ]
-        }
-    },
-    "filters": {
-        "comments": {
-            "enablingComment": "textlint-enable",
-            "disablingComment": "textlint-disable"
         },
-				"allowlist": {
-            "allow": [
-							"ユーザ",
-							"/``[\\s\\S]*?''/m",
-							"/\\{\\{[\\s\\S]*?\\}\\}/m"
-            ]
+        "terminology": {
+            "defaultTerms": true,
+            "skip": [],
+            "terms": "./terms.jsonc",
+            "exclude": []
         }
     }
 }
